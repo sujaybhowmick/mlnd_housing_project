@@ -52,7 +52,6 @@ def fit_model(X, y):
 def main():
     cmd_args = sys.argv
     if len(cmd_args) < 3:
-
         print "Usage: python {} <data_file> <client_data_file>".format(__file__)
         exit(1)
 
