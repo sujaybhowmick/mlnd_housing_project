@@ -24,12 +24,12 @@ def performance_metric(y_true, y_predict):
     score = r2_score(y_true, y_predict)
     return score
 
-def fit_model(X, y):
+def fit_model(X_train, y_train):
     """ Performs grid search over the 'max_depth' parameter for a
         decision tree regressor trained on the input data [X, y]. """
 
     # Shuffle and Split to obtain cross validation sets
-    cv_sets = ShuffleSplit(n_splits = 10, test_size = 0.20, random_state = 0).get_n_splits(X, y)
+    cv_sets = ShuffleSplit(n_splits = 10, test_size = 0.20, random_state = 0).get_n_splits(X_train, y_train)
 
     # Create decesion tree regressor
     regressor = DecisionTreeRegressor()
@@ -44,7 +44,7 @@ def fit_model(X, y):
 
     grid_cv = GridSearchCV(regressor, depth_params, scoring=score_fn, cv=cv_sets)
 
-    grid_cv.fit(X, y)
+    grid_cv.fit(X_train, y_train)
 
     return grid_cv.best_estimator_
 
